@@ -387,7 +387,10 @@ async function sendButtons(to, bodyText, buttons) {
 }
 
 async function sendMainMenu(to) {
-  await sendButtons(to, "Lütfen bir alan seçiniz:", MAIN_CHOICES);
+  const groups = chunk(MAIN_CHOICES, 3); // reuse your chunk helper
+  for (const g of groups) {
+    await sendButtons(to, "Lütfen bir alan seçiniz:", g);
+  }
 }
 async function sendOrthoSubs(to) {
   // 3'lü buton limitine sığmak için sıralı gönderiyoruz
