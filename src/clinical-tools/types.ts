@@ -1,0 +1,10 @@
+export type ToolCategory = 'terminology' | 'medication' | 'lab' | 'guideline' | 'calculator' | 'documentation';
+export type MembershipTier = 'basic' | 'pro' | 'elite';
+export type Frequency = 'very_common' | 'common' | 'moderate';
+export type RiskLevel = 'low' | 'moderate' | 'high_requires_validated_data' | 'potential_samd_review';
+export type ImplementationType = 'local_formula' | 'local_rules' | 'external_api' | 'licensed_api_required' | 'rag_required' | 'hybrid';
+export type ToolStatus = 'implemented' | 'integration_stub' | 'requires_license' | 'requires_local_dataset';
+export type SourceMetadata = { name: string; type: 'official_api'|'official_guideline'|'licensed_database'|'local_dataset'|'formula_reference'|'internal_protocol'|'stub'; url?: string; version?: string; accessedAt?: string; licenseNote?: string };
+export type ToolInputSchema = { key: string; labelTR: string; type: 'string'|'number'|'boolean'|'date'|'select'|'array'; required?: boolean };
+export type ToolOutput = { toolId: string; resultSummaryTR: string; structuredResult: Record<string, unknown>; interpretationTR?: string; warningsTR: string[]; nextStepSuggestionsTR?: string[]; sourceMetadata: SourceMetadata[]; generatedAt: string; disclaimerTR: string };
+export type ToolDefinition = { id:string; titleTR:string; titleEN?:string; category:ToolCategory; membershipTier:MembershipTier; frequency:Frequency; riskLevel:RiskLevel; descriptionTR:string; inputs:ToolInputSchema[]; outputSchema:{type:string}; implementationType:ImplementationType; sources:SourceMetadata[]; status:ToolStatus };

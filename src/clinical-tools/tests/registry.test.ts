@@ -1,0 +1,2 @@
+import { describe,it,expect } from 'vitest'; import { clinicalToolRegistry } from '../registry';
+describe('registry',()=>{ it('has 30 tools',()=>expect(clinicalToolRegistry).toHaveLength(30)); it('unique ids',()=>expect(new Set(clinicalToolRegistry.map(t=>t.id)).size).toBe(30)); it('sources/risk/tier',()=>clinicalToolRegistry.forEach(t=>{expect(t.sources.length).toBeGreaterThan(0); expect(t.riskLevel).toBeTruthy(); expect(['basic','pro','elite']).toContain(t.membershipTier);}));});
