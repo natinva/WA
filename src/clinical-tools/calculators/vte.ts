@@ -1,0 +1,2 @@
+import { CLINICAL_DISCLAIMER_TR } from '../constants'; import type { ToolOutput } from '../types';
+export const runVte=(i:any):ToolOutput=>{ const wells=i.wellsScore??0; const ageAdjusted=i.age>50?i.age*10:500; const percNeg=!(i.percPositive); return {toolId:'wells-perc-ddimer',resultSummaryTR:`Wells ${wells}, PERC ${percNeg?'negatif':'pozitif'}`,structuredResult:{wells,percNeg,ageAdjustedDdimerThreshold:ageAdjusted},warningsTR:[],sourceMetadata:[{name:'Wells/PERC',type:'formula_reference'}],generatedAt:new Date().toISOString(),disclaimerTR:CLINICAL_DISCLAIMER_TR}; };

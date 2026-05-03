@@ -1,0 +1,5 @@
+import { clinicalToolRegistry, runBmiBsa, runEgfrCrcl, runAfScores, runVte, runPneumonia, runAcute, runPregnancyDating, runPatientEducation, runReferralDraft, runIcdSearch } from '../clinical-tools/index';
+const runners:Record<string,(i:any)=>any>={ 'bmi-bsa':runBmiBsa,'egfr-crcl':runEgfrCrcl,'cha2ds2-hasbled':runAfScores,'wells-perc-ddimer':runVte,'curb65-crb65':runPneumonia,'news2-qsofa':runAcute,'pregnancy-dating-edd':runPregnancyDating,'patient-education':runPatientEducation,'referral-discharge-draft':runReferralDraft,'icd-search':runIcdSearch };
+export const getTools=()=>({success:true,data:clinicalToolRegistry});
+export const getTool=(id:string)=>{ const t=clinicalToolRegistry.find(x=>x.id===id); return t?{success:true,data:t}:{success:false,error:{code:'NOT_FOUND',messageTR:'Tool bulunamadı'}}; };
+export const runTool=(id:string,input:any)=>{ const fn=runners[id]; if(!fn) return {success:false,error:{code:'NOT_IMPLEMENTED',messageTR:'Tool henüz implement edilmedi'}}; try{return {success:true,data:fn(input)};}catch(e:any){return {success:false,error:{code:'VALIDATION',messageTR:e.message}};} };

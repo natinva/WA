@@ -1,0 +1,2 @@
+import { CLINICAL_DISCLAIMER_TR } from '../constants'; import type { ToolOutput } from '../types';
+export const runAcute=(i:any):ToolOutput=>({toolId:'news2-qsofa',resultSummaryTR:'NEWS2/qSOFA hesaplandı',structuredResult:{news2:(i.rr>=25?3:0)+(i.sbp<=90?3:0),qsofa:(i.rr>=22?1:0)+(i.sbp<=100?1:0)+(i.alteredMental?1:0)},warningsTR:['Kritik durumda acil değerlendirme gerekir.'],sourceMetadata:[{name:'NEWS2/qSOFA',type:'formula_reference'}],generatedAt:new Date().toISOString(),disclaimerTR:CLINICAL_DISCLAIMER_TR});

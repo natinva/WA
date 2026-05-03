@@ -1,0 +1,2 @@
+import { CLINICAL_DISCLAIMER_TR } from '../constants'; import type { ToolOutput } from '../types';
+export const runPneumonia=(i:any):ToolOutput=>{ const s=(i.confusion?1:0)+(i.urea>7?1:0)+(i.rr>=30?1:0)+(i.lowBp?1:0)+(i.age>=65?1:0); const crb=s-(i.urea>7?1:0); return {toolId:'curb65-crb65',resultSummaryTR:`CURB-65 ${s}, CRB-65 ${crb}`,structuredResult:{curb65:s,crb65:crb},warningsTR:['Yatış kararı yerine geçmez.'],sourceMetadata:[{name:'CURB-65',type:'formula_reference'}],generatedAt:new Date().toISOString(),disclaimerTR:CLINICAL_DISCLAIMER_TR}; };
